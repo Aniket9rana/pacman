@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAC-MAN NEON ARCADE</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" href="assets/pacman_life.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <div id="ui-overlay">
+            <div id="start-screen" class="screen">
+                <h1>PAC-MAN</h1>
+                <div class="high-score-display">
+                    <p>HIGH SCORE</p>
+                    <span id="high-score-screen">0000</span>
+                </div>
+                <button id="start-button">START GAME</button>
+                <div class="controls-hint">
+                    <p>ARROW KEYS TO MOVE</p>
+                    <p>ESC OR P TO PAUSE</p>
+                </div>
+            </div>
+
+            <div id="pause-screen" class="screen" style="display: none;">
+                <h1>PAUSED</h1>
+                <button id="resume-button">RESUME</button>
+            </div>
+
+            <div id="game-over-screen" class="screen" style="display: none;">
+                <h1>GAME OVER</h1>
+                <p>FINAL SCORE</p>
+                <span id="final-score">0000</span>
+                <button id="restart-button">RETRY</button>
+            </div>
+
+            <div id="level-clear-screen" class="screen" style="display: none;">
+                <h1>LEVEL CLEAR!</h1>
+                <p>GET READY...</p>
+            </div>
+
+            <div id="ready-text" style="display: none;">READY!</div>
+        </div>
+    </div>
+
+    <div id="hud">
+        <div class="score-container">
+            <span>SCORE</span>
+            <span id="score">0000</span>
+        </div>
+        <div class="score-container">
+            <span>HIGH SCORE</span>
+            <span id="high-score">0000</span>
+        </div>
+        <div id="lives-container">
+            <!-- Lives will be injected here -->
+        </div>
+        <div class="score-container">
+            <span>LEVEL</span>
+            <span id="level">1</span>
+        </div>
+    </div>
+
+    <script src="src/main.js" type="module"></script>
+</body>
+</html>

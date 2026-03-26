@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;700&display=swap');
+
+:root {
+  --primary-yellow: #FFFF00;
+  --secondary-blue: #00FFFF;
+  --accent-red: #FF0000;
+  --accent-pink: #FFC0CB;
+  --accent-cyan: #00FFFF;
+  --accent-orange: #FFA500;
+  --bg-black: #000000;
+  --bg-surface: #131313;
+  --glow-yellow: 0 0 10px #FFFF00, 0 0 20px #FFFF00;
+  --glow-blue: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+  --glow-red: 0 0 10px #FF0000, 0 0 20px #FF0000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-black);
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* CRT Scanline Effect */
+body::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 200;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+#game-container {
+  position: relative;
+  width: 90vw;
+  height: 80vh;
+  max-width: 700px;
+  max-height: 850px;
+  background-color: var(--bg-surface);
+  border: 4px solid var(--secondary-blue);
+  box-shadow: var(--glow-blue);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+#game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 80%;
+  padding: 2rem;
+  background: var(--bg-surface);
+  border: 2px solid var(--primary-yellow);
+  box-shadow: var(--glow-yellow);
+  border-radius: 0; /* Arcade style - square corners */
+}
+
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--primary-yellow);
+  text-shadow: var(--glow-yellow);
+}
+
+#start-screen h1 {
+  animation: flicker 2s infinite;
+}
+
+#game-over-screen h1 {
+  color: var(--accent-red);
+  text-shadow: var(--glow-red);
+  animation: flicker 0.5s infinite;
+}
+
+button {
+  background: transparent;
+  border: 2px solid var(--primary-yellow);
+  color: var(--primary-yellow);
+  font-family: 'Press Start 2P', cursive;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1rem 0;
+  box-shadow: 0 0 5px var(--primary-yellow);
+}
+
+button:hover {
+  background: var(--primary-yellow);
+  color: var(--bg-black);
+  box-shadow: var(--glow-yellow);
+  transform: scale(1.05);
+}
+
+p {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 1rem;
+}
+
+#hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+  max-width: 700px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border: 4px solid var(--secondary-blue);
+  box-shadow: var(--glow-blue);
+  background: var(--bg-surface);
+  border-radius: 8px;
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-container span:first-child {
+  font-size: 0.8rem;
+  color: var(--secondary-blue);
+  font-family: 'Press Start 2P', cursive;
+  margin-bottom: 0.5rem;
+}
+
+#score, #high-score, #level {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.4rem;
+  color: #FFFFFF;
+}
+
+#lives-container {
+  display: flex;
+  gap: 10px;
+}
+
+#ready-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3rem;
+  color: var(--primary-yellow);
+  text-shadow: var(--glow-yellow);
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  5% { opacity: 0.8; }
+  10% { opacity: 1; }
+  15% { opacity: 0.9; }
+  20% { opacity: 1; }
+  60% { opacity: 1; }
+  61% { opacity: 0.8; }
+  62% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.8; }
+  to { transform: scale(1.2); opacity: 1; }
+}
